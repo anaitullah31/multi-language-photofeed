@@ -7,21 +7,21 @@ let defaultLocale = "en";
 
 function getLocalte(request) {
   const acceptedLanguage = request.headers.get("accept-language") ?? undefined;
-//   console.log("Accepted Laguages", acceptedLanguage);
+  //   console.log("Accepted Laguages", acceptedLanguage);
 
   const headers = { "accept-language": acceptedLanguage };
 
-//   console.log("Headers", headers);
+  //   console.log("Headers", headers);
   const languages = new Negotiator({ headers }).languages();
 
-//   console.log("Languages", languages);
+  //   console.log("Languages", languages);
 
   return match(languages, locales, defaultLocale);
 }
 
 export function proxy(request) {
   const pathname = request.nextUrl.pathname;
-//   console.log("Pathname", pathname);
+  //   console.log("Pathname", pathname);
 
   const pathnameIsMissingLocale = locales.every(
     (locale) => !pathname.startsWith(`/${locale}`) && pathname !== `/${locale}`,
@@ -40,7 +40,8 @@ export function proxy(request) {
 export const config = {
   matcher: [
     // Skip all internal paths (_next)
-    "/((?!_next).*)",
+    // "/((?!_next|api|favicon.ico).*)",
+     "/((?!_next|api|favicon.ico|.*\\..*).*)",
     // Optional: only run on root (/) URL
     // '/'
   ],
