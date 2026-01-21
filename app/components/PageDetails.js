@@ -1,10 +1,11 @@
 
+import { getBaseUrl } from "@/lib/getBaseUrl";
 import { getDictionary } from "../[lang]/dictionaries/dictionaries";
 import Image from "next/image";
 
 const PageDetails = async ({ id, lang }) => {
     
-  const response = await fetch(`${process.env.BASE_API_URL}/photos/${id}`);
+  const response = await fetch(`${getBaseUrl()}/api/photos/${id}`);
   const photo = await response.json();
   const dictionary = await getDictionary(lang);
   return (
