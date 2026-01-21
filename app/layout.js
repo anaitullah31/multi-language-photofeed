@@ -25,6 +25,7 @@ export default function RootLayout({ children }) {
       >
         <Navbar />
         <div className="container mx-auto">{children}</div>
+        <div id="modal-root-content"></div>
       </body>
     </html>
   );
